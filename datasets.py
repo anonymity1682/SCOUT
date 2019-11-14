@@ -68,8 +68,8 @@ class ImageFilelist(data.Dataset):
 
 def ade(batch_size, train=True, val=True, **kwargs):
 
-    train_list = '/data6/peiwang/datasets/ADEChallengeData2016/ADE_gt_tr.txt'
-    val_list = '/data6/peiwang/datasets/ADEChallengeData2016/ADE_gt_val.txt'
+    train_list = './ade/ADEChallengeData2016/ADE_gt_tr.txt'
+    val_list = './ade/ADEChallengeData2016/ADE_gt_val.txt'
     num_workers = kwargs.setdefault('num_workers', 1)
     kwargs.pop('input_size', None)
     print("Building data loader with {} workers".format(num_workers))
@@ -111,8 +111,8 @@ def ade(batch_size, train=True, val=True, **kwargs):
 
 def adehard(batch_size, train=True, val=True, **kwargs):
 
-    train_list = '/data6/peiwang/datasets/ADEChallengeData2016/ADE_gt_tr.txt'
-    val_list = '/data6/peiwang/datasets/ADEChallengeData2016/ADEhard_gt_val.txt'
+    train_list = './ade/ADEChallengeData2016/ADE_gt_tr.txt'
+    val_list = './ade/ADEChallengeData2016/ADEhard_gt_val.txt'
     num_workers = kwargs.setdefault('num_workers', 1)
     kwargs.pop('input_size', None)
     print("Building data loader with {} workers".format(num_workers))
@@ -153,8 +153,8 @@ def adehard(batch_size, train=True, val=True, **kwargs):
 
 def cub200(batch_size, train=True, val=True, **kwargs):
 
-    train_list = '/data6/peiwang/datasets/CUB_200_2011/CUB200_gt_tr.txt'
-    val_list = '/data6/peiwang/datasets/CUB_200_2011/CUB200_gt_te.txt'
+    train_list = './cub200/CUB_200_2011/CUB200_gt_tr.txt'
+    val_list = './cub200/CUB_200_2011/CUB200_gt_te.txt'
     # val_list = '/data6/peiwang/datasets/CUB_200_2011/multibirds_gt_te.txt'
     num_workers = kwargs.setdefault('num_workers', 1)
     kwargs.pop('input_size', None)
