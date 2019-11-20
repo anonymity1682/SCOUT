@@ -165,6 +165,9 @@ python cf_es_vgg_ade_gradcam.py
 
 ### pretrained models
 
+The [pre-trained models](https://drive.google.com/drive/folders/1fh1HMqjrFFctkTgjYvylEiUhEQP3aZOg?usp=sharing) for all experiments are availiable.
+
+
 
 
 ## Time and Space
@@ -209,6 +212,6 @@ This part has been presented in Table 1 of the paper.
 
 [3] Pei Wang and Nuno Vasconcelos. Towards realistic predictors. In The European Conference on Computer Vision, 2018.
 
-[4] Alex Krizhevsky and Geoffrey Hinton. Learning multiple layers of features from tiny images. Technical report, Citeseer, 2009.
+[4] Welinder P., Branson S., Mita T., Wah C., Schroff F., Belongie S., Perona, P. “Caltech-UCSD Birds 200”. California Institute of Technology. CNS-TR-2010-001. 2010.
 
 [5] Bolei  Zhou,  Hang  Zhao,  Xavier  Puig,  Sanja  Fidler,  Adela  Barriuso,  and  Antonio  Torralba.   Scene parsing through ade20k
