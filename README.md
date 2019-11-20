@@ -1,6 +1,6 @@
 # SCOUT
 
-![scout](/Figs/cf.PNG)
+![cf](/Figs/cf.PNG)
 
 
 ## Requirements
