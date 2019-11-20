@@ -9,18 +9,17 @@ from PIL import Image
 
 _NUM_CLASSES = {
     'cub200': 200,
-    'cub200hard': 200,
+    'cub200cf': 200,
     'ade': 1040,
-    'adehard': 1040,
+    'ade_cf': 1040,
 }
+
 
 
 def default_loader(path):
     return Image.open(path).convert('RGB')
 
 
-def default_loader_mnist(path):
-    return Image.open(path).convert('L')
 
 def default_flist_reader(flist):
     """
@@ -109,10 +108,12 @@ def ade(batch_size, train=True, val=True, **kwargs):
     return ds
 
 
-def adehard(batch_size, train=True, val=True, **kwargs):
+
+
+def ade_cf(batch_size, train=True, val=True, **kwargs):
 
     train_list = './ade/ADEChallengeData2016/ADE_gt_tr.txt'
-    val_list = './ade/ADEChallengeData2016/ADEhard_gt_val.txt'
+    val_list = './ade/ADEChallengeData2016/ADEcf_gt_val.txt'
     num_workers = kwargs.setdefault('num_workers', 1)
     kwargs.pop('input_size', None)
     print("Building data loader with {} workers".format(num_workers))
@@ -123,9 +124,10 @@ def adehard(batch_size, train=True, val=True, **kwargs):
             ImageFilelist(
                 flist=train_list,
                 transform=transforms.Compose([
-                    transforms.RandomResizedCrop(224),
-                    transforms.RandomHorizontalFlip(),
+                    transforms.Resize(256),
+                    transforms.CenterCrop(224),
                     transforms.ToTensor(),
+                    # transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
                     transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
                 ])),
             batch_size=batch_size, shuffle=True, **kwargs)
@@ -141,6 +143,7 @@ def adehard(batch_size, train=True, val=True, **kwargs):
                     transforms.Resize(256),
                     transforms.CenterCrop(224),
                     transforms.ToTensor(),
+                    # transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
                     transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
                 ])),
             batch_size=batch_size, shuffle=False, **kwargs)
@@ -148,14 +151,13 @@ def adehard(batch_size, train=True, val=True, **kwargs):
         ds.append(test_loader)
     ds = ds[0] if len(ds) == 1 else ds
     return ds
-
 
 
 def cub200(batch_size, train=True, val=True, **kwargs):
 
     train_list = './cub200/CUB_200_2011/CUB200_gt_tr.txt'
     val_list = './cub200/CUB_200_2011/CUB200_gt_te.txt'
-    # val_list = '/data6/peiwang/datasets/CUB_200_2011/multibirds_gt_te.txt'
+
     num_workers = kwargs.setdefault('num_workers', 1)
     kwargs.pop('input_size', None)
     print("Building data loader with {} workers".format(num_workers))
@@ -169,6 +171,7 @@ def cub200(batch_size, train=True, val=True, **kwargs):
                     transforms.RandomResizedCrop(224),
                     transforms.RandomHorizontalFlip(),
                     transforms.ToTensor(),
+                    # transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
                     transforms.Normalize((0.4706145, 0.46000465, 0.45479808), (0.26668432, 0.26578658, 0.2706199)),
                 ])),
             batch_size=batch_size, shuffle=True, **kwargs)
@@ -183,6 +186,7 @@ def cub200(batch_size, train=True, val=True, **kwargs):
                     transforms.Resize(256),
                     transforms.CenterCrop(224),
                     transforms.ToTensor(),
+                    # transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
                     transforms.Normalize((0.4706145, 0.46000465, 0.45479808), (0.26668432, 0.26578658, 0.2706199)),
                 ])),
             batch_size=batch_size, shuffle=False, **kwargs)
@@ -192,11 +196,12 @@ def cub200(batch_size, train=True, val=True, **kwargs):
     return ds
 
 
-def cub200hard(batch_size, train=True, val=True, **kwargs):
 
-    train_list = './cub200/CUB200hard_gt_te.txt'
-    val_list = './cub200/CUB200hard_gt_te.txt'
-    # val_list = '/data6/peiwang/datasets/CUB_200_2011/multibirds_gt_te.txt'
+
+def cub200cf(batch_size, train=True, val=True, **kwargs):
+
+    train_list = './cub200/CUB_200_2011/CUB200_gt_tr.txt'
+    val_list = './cub200/CUB_200_2011/CUB200cf_gt_te.txt'
     num_workers = kwargs.setdefault('num_workers', 1)
     kwargs.pop('input_size', None)
     print("Building data loader with {} workers".format(num_workers))
@@ -207,10 +212,10 @@ def cub200hard(batch_size, train=True, val=True, **kwargs):
             ImageFilelist(
                 flist=train_list,
                 transform=transforms.Compose([
-                    transforms.RandomResizedCrop(224),
-                    transforms.RandomHorizontalFlip(),
+                    transforms.Resize(256),
+                    transforms.CenterCrop(224),
                     transforms.ToTensor(),
-                    transforms.Normalize((0.4706145, 0.46000465, 0.45479808), (0.26668432, 0.26578658, 0.2706199)),
+                    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
                 ])),
             batch_size=batch_size, shuffle=True, **kwargs)
         print("Training data size: {}".format(len(train_loader.dataset)))
@@ -223,7 +228,9 @@ def cub200hard(batch_size, train=True, val=True, **kwargs):
                 transform=transforms.Compose([
                     transforms.Resize(256),
                     transforms.CenterCrop(224),
+                    # transforms.RandomResizedCrop(224),
                     transforms.ToTensor(),
+                    # transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
                     transforms.Normalize((0.4706145, 0.46000465, 0.45479808), (0.26668432, 0.26578658, 0.2706199)),
                 ])),
             batch_size=batch_size, shuffle=False, **kwargs)
