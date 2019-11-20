@@ -1,5 +1,7 @@
 # SCOUT
 
+![scout](/Figs/cf.PNG)
+
 
 ## Requirements
 
