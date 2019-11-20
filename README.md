@@ -128,40 +128,39 @@ python cf_cs_vgg_ade.py --student=advanced --maps=abs
 python cf_es_vgg_ade.py --student=advanced --maps=abs
 ```
 
-
-
-Three types of attribution methods are compared, baseline [gradient based](https://arxiv.org/abs/1312.6034), [Grad-CAM](https://ieeexplore.ieee.org/document/8237336), state-of-the-art [integrated gradient (IG) based](https://dl.acm.org/citation.cfm?id=3306024).
-
-In order to reproduce experiment results,
-
-1. for comparison of different scores,
+5. To reproduce results on sec 2 of supplement
+```
+python cf_ss_vgg_unique_cub.py --student=beginners --maps=a
+python cf_ss_vgg_unique_cub.py --student=beginners --maps=as
+python cf_cs_vgg_unique_cub.py --student=beginners --maps=as
+python cf_es_vgg_unique_cub.py --student=beginners --maps=as
+python cf_ss_vgg_unique_cub.py --student=advanced --maps=a
+python cf_ss_vgg_unique_cub.py --student=advanced --maps=as
+python cf_cs_vgg_unique_cub.py --student=advanced --maps=as
+python cf_es_vgg_unique_cub.py --student=advanced --maps=as
+python cf_ss_vgg_unique_ade.py --student=beginners --maps=a
+python cf_ss_vgg_unique_ade.py --student=beginners --maps=as
+python cf_cs_vgg_unique_ade.py --student=beginners --maps=as
+python cf_es_vgg_unique_ade.py --student=beginners --maps=as
+python cf_ss_vgg_unique_ade.py --student=advanced --maps=a
+python cf_ss_vgg_unique_ade.py --student=advanced --maps=as
+python cf_cs_vgg_unique_ade.py --student=advanced --maps=as
+python cf_es_vgg_unique_ade.py --student=advanced --maps=as
 ```
 
+6. To reproduce results on sec 3 of supplement. Three types of attribution methods are compared, baseline [gradient based](https://arxiv.org/abs/1312.6034), [Grad-CAM](https://ieeexplore.ieee.org/document/8237336), state-of-the-art [integrated gradient (IG) based](https://dl.acm.org/citation.cfm?id=3306024).
 ```
-
-2. for comparison of different hidden layers,
+python cf_es_vgg_cub.py
+python cf_es_res34_cub.py
+python cf_es_res50_cub.py
+python cf_es_vgg_ade.py
+python cf_es_res34_ade.py
+python cf_es_res50_ade.py
+python cf_es_vgg_cub_IG.py
+python cf_es_vgg_cub_gradcam.py
+python cf_es_vgg_ade_IG.py
+python cf_es_vgg_ade_gradcam.py
 ```
-
-```
-Additionally, the layer number need to be changed for different hidden layers, 12, 22, 32, 42 w.r.t. conv2_2, conv3_3, conv4_3, conv5_3.
-
-
-3. for comparison of different attribution maps,
-```
-
-```
-
-4. for comparison of different architectures,
-
-```
-
-```
-
-
-```
-
-### results presenting
-
 
 
 ### pretrained models
@@ -181,8 +180,7 @@ model     | #GPUs | train time |
 ---------|--------|-----|
 AlexNet-CNN-baseline     | 1 | ~50min    | 
 VGG16-CNN-baseline     | 2 | ~70min    |
-Res50-CNN-baseline     | 1 | ~60min    |
-AlexNet-HardnessPredictor     | 4 | ~85min    | 
+Res50-CNN-baseline     | 1 | ~60min    | 
 VGG16-HardnessPredictor     | 4 | ~120min   |
 Res50-HardnessPredictor     | 2 | ~100min    |
 
@@ -194,45 +192,12 @@ model     | #GPUs | train time |
 AlexNet-CNN-baseline     | 1 | ~65min    | 
 VGG16-CNN-baseline     | 2 | ~130min    |
 Res50-CNN-baseline     | 1 | ~100min    |
-AlexNet-HardnessPredictor     | 4 | ~110min    | 
 VGG16-HardnessPredictor     | 4 | ~220min   |
 Res50-HardnessPredictor     | 2 | ~170min    |
 
 ### inference
 
-Because our results are reported based on insecurities generated from 100 most difficult examples on both datasets, the inference time is the same on two datasets. We just take CUB200 as example,
-
-1. for comparison of different scores,
-
-model     | #GPUs | time |
----------|--------|-----|
-get_cs_cub__vgg     | 1 | ~1min    | 
-get_entropy_cub__vgg     | 1 | ~1min    |
-get_hp_cub_vgg     | 1 | ~1min    |
-
-2. for comparison of different hidden layers,
-
-model     | #GPUs | time |
----------|--------|-----|
-get_hp_cub_vgg     | 1 | ~1min    | 
-
-3. for comparison of different attribution maps,
-
-model     | #GPUs | time |
----------|--------|-----|
-get_hp_cub_vgg     | 1 | ~1min    | 
-get_hp_cub_vgg_cls     | 1 | ~1min    |
-get_hp_cub_vgg_IG     | 1 | ~10min    |
-get_hp_cub_vgg_2ndG     | 1 | ~15hr    |
-
-
-4. for comparison of different architectures,
-
-model     | #GPUs | time |
----------|--------|-----|
-get_hp_cub_alexnet     | 1 | ~1min    | 
-get_hp_cub_vgg     | 1 | ~1min    | 
-get_hp_cub_res     | 1 | ~1min    | 
+This part has been presented in Table 1 of the paper.
 
 
 
