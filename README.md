@@ -43,11 +43,11 @@ make_cub_list.py
 make_ade_list.py
 ```
 
-compute dissimilarity for parts on CUB200 and objects on ADE20K,
+compute ground truth parts on CUB200 and objects on ADE20K,
 
 ```
-create_similarityMatrix_cls_part.py
-create_similarityMatrix_cls_object.py
+make_gt_cub.py
+make_gt_ade.py
 ```
 
 prepare attribute location data on CUB200
@@ -60,24 +60,75 @@ get_gt_partLocs.py
 
 Two types of models need to be trained, the standard CNN classifier and [Hardness predictor](http://openaccess.thecvf.com/content_ECCV_2018/html/Pei_Wang_Towards_Realistic_Predictors_ECCV_2018_paper.html). Three most popular architectures were tested. For reproducing each result individually, we separately wrote the code for each experiment. For the classifier,
 ```
-train_cub_alexnet.py
-train_cub_vgg.py
-train_cub_res.py
-train_ade_alexnet.py
-train_ade_vgg.py
-train_ade_res.py
+./cub200/train_cub_alexnet.py
+./cub200/train_cub_vgg.py
+./cub200/train_cub_res.py
+./ade/train_ade_alexnet.py
+./ade/train_ade_vgg.py
+./ade/train_ade_res.py
 ```
 for the hardness predictor,
 ```
-train_hp_cub_alexnet.py
-train_hp_cub_vgg.py
-train_hp_cub_res.py
-train_hp_ade_alexnet.py
-train_hp_ade_vgg.py
-train_hp_ade_res.py
+./cub200/train_hp_cub_vgg.py
+./cub200/train_hp_cub_res.py
+./ade/train_hp_ade_vgg.py
+./ade/train_hp_ade_res.py
 ```
 
 ### visualization
+
+1. To reproduce results on sec 5.1
+```
+python cf_ss_vgg_cub.py --student=beginners --maps=a
+python cf_ss_vgg_cub.py --student=beginners --maps=ab
+python cf_ss_vgg_cub.py --student=beginners --maps=abs
+python cf_cs_vgg_cub.py --student=beginners --maps=abs
+python cf_es_vgg_cub.py --student=beginners --maps=abs
+python cf_ss_vgg_cub.py --student=advanced --maps=a
+python cf_ss_vgg_cub.py --student=advanced --maps=ab
+python cf_ss_vgg_cub.py --student=advanced --maps=abs
+python cf_cs_vgg_cub.py --student=advanced --maps=abs
+python cf_es_vgg_cub.py --student=advanced --maps=abs
+```
+
+2. To reproduce results on sec 5.2
+```
+python cf_ss_vgg_cub.py --student=beginners
+python cf_ss_vgg_cub.py --student=advanced
+python cf_ss_res_cub.py --student=beginners
+python cf_ss_res_cub.py --student=advanced
+python cf_PIoU_ss_vgg_cub.py --student=beginners
+python cf_PIoU_ss_vgg_cub.py --student=advanced
+python cf_exhaustive_vgg_cub.py --student=beginners
+python cf_exhaustive_vgg_cub.py --student=advanced
+python cf_exhaustive_res_cub.py --student=beginners
+python cf_exhaustive_res_cub.py --student=advanced
+python cf_PIoU_exhaustive_vgg_cub.py --student=beginners
+python cf_PIoU_exhaustive_vgg_cub.py --student=advanced
+```
+
+3. To reproduce results on sec 5.3
+```
+python cf_match_res_cub.py
+python cf_match_exhaustive_cub.py
+python cf_match_vgg_ade.py
+```
+
+4. To produce results on sec 1 of supplement
+```
+python cf_ss_vgg_ade.py --student=beginners --maps=a
+python cf_ss_vgg_ade.py --student=beginners --maps=ab
+python cf_ss_vgg_ade.py --student=beginners --maps=abs
+python cf_cs_vgg_ade.py --student=beginners --maps=abs
+python cf_es_vgg_ade.py --student=beginners --maps=abs
+python cf_ss_vgg_ade.py --student=advanced --maps=a
+python cf_ss_vgg_ade.py --student=advanced --maps=ab
+python cf_ss_vgg_ade.py --student=advanced --maps=abs
+python cf_cs_vgg_ade.py --student=advanced --maps=abs
+python cf_es_vgg_ade.py --student=advanced --maps=abs
+```
+
+
 
 Three types of attribution methods are compared, baseline [gradient based](https://arxiv.org/abs/1312.6034), [Grad-CAM](https://ieeexplore.ieee.org/document/8237336), state-of-the-art [integrated gradient (IG) based](https://dl.acm.org/citation.cfm?id=3306024).
 
