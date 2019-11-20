@@ -150,7 +150,7 @@ python cf_cs_vgg_unique_ade.py --student=advanced --maps=as
 python cf_es_vgg_unique_ade.py --student=advanced --maps=as
 ```
 
-6. To reproduce results on sec 3 of supplement. Three types of attribution methods are compared, baseline [gradient based](https://arxiv.org/abs/1312.6034), [Grad-CAM](https://ieeexplore.ieee.org/document/8237336), state-of-the-art [integrated gradient (IG) based](https://dl.acm.org/citation.cfm?id=3306024).
+6. To reproduce results on sec 3 of supplement. Three types of attribution methods are compared, baseline [gradient based](https://arxiv.org/abs/1312.6034), state-of-the-art [Grad-CAM](https://ieeexplore.ieee.org/document/8237336) and [integrated gradient (IG) based](https://dl.acm.org/citation.cfm?id=3306024).
 ```
 python cf_es_vgg_cub.py
 python cf_es_res34_cub.py
